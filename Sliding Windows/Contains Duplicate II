@@ -4,7 +4,7 @@ Question No : 219 Leetcode Contains Duplicate II
 https://leetcode.com/problems/contains-duplicate-ii/description/?envType=problem-list-v2&envId=sliding-window
 
   
-
+                                 Better Approach using set
 
 class Solution {
 public:
@@ -21,6 +21,32 @@ public:
                 st.erase(nums[left]);
                 left++;
             }
+        }
+        return false;
+    }
+};
+
+
+
+
+             Optimal Approach using the map
+
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        int n=nums.size();
+        unordered_map<int,int> mpp;
+        int left=0,right=0;
+        while(right<n){
+            mpp[nums[right]]++;
+            if(mpp[nums[right]]>1){
+                return true;
+            }
+            if(right-left+1>k){
+                mpp[nums[left]]--;
+                left++;
+            }
+            right++;
         }
         return false;
     }
